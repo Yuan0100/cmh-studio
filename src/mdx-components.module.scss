@@ -1,0 +1,127 @@
+/* filepath: /Users/yuan/Documents/GitHub/chimin-hsieh/cmh-lab-next/src/mdx-components.module.css */
+.heading1 {
+  margin-top: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: -0.05em;
+}
+
+.heading2 {
+  margin-top: 40px;
+  padding-bottom: 10px;
+  font-size: 2rem;
+  font-weight: semibold;
+  border-bottom: 1px solid #ddd;
+}
+
+.heading3 {
+  margin-top: 32px;
+  font-size: 1.75rem;
+  font-weight: semibold;
+}
+
+.heading4 {
+  margin-top: 32px;
+  font-size: 1.5rem;
+  font-weight: semibold;
+}
+
+.heading5 {
+  margin-top: 32px;
+  font-size: 1.25rem;
+  font-weight: semibold;
+}
+
+.heading6 {
+  margin-top: 32px;
+  font-size: 1rem;
+  font-weight: semibold;
+}
+
+.link {
+  font-weight: medium;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.paragraph {
+  line-height: 1.75;
+  margin-top: 24px;
+}
+
+.unorderedList {
+  margin-top: 24px;
+  margin-left: 24px;
+  list-style-type: disc;
+}
+
+.orderedList {
+  margin-top: 24px;
+  margin-left: 24px;
+  list-style-type: decimal;
+}
+
+.listItem {
+  margin-top: 8px;
+}
+
+.blockquote {
+  margin-top: 24px;
+  border-left: 2px solid #ddd;
+  padding-left: 24px;
+  font-style: italic;
+}
+
+.image {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.horizontalRule {
+  margin: 24px 0;
+}
+
+.tableContainer {
+  margin-top: 24px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableRow {
+  border-top: 1px solid #ddd;
+}
+
+.tableHeader {
+  padding: 8px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.tableCell {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.preformatted {
+  margin: 24px 0;
+  padding: 16px;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+:not(.preformatted)>.code {
+  padding: 2px 4px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
