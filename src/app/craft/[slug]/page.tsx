@@ -1,8 +1,10 @@
-import { getPostBySlug, getStudioPosts } from "../utils";
+import { getPostBySlug, getPosts } from "../utils";
 import { notFound } from "next/navigation";
 import { serialize } from "next-mdx-remote/serialize";
 import CustomMDX from "@/app/components/CustomMDX";
 import { mdxOptions } from "@/lib/mdx";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 
 type Props = {
@@ -11,7 +13,7 @@ type Props = {
   }>
 }
 
-export default async function StudioPost({ params }: Props) {
+export default async function CraftPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
@@ -27,17 +29,21 @@ export default async function StudioPost({ params }: Props) {
 
   return (
     <div>
-      <h1>{post.metadata.title}</h1>
-      <p>{post.metadata.description}</p>
-      <div>
-        <CustomMDX mdxSource={mdxSource} />
-      </div>
+      <Header />
+      <main>
+        <h1>{post.metadata.title}</h1>
+        <p>{post.metadata.description}</p>
+        <div>
+          <CustomMDX mdxSource={mdxSource} />
+        </div>
+      </main>
+      <Footer />
     </div>
   )
 }
 
 export async function generateStaticParams() {
-  const posts = getStudioPosts()
+  const posts = getPosts()
 
   const paths = posts.map(post => ({
     params: { slug: post.slug },

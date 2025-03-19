@@ -1,6 +1,80 @@
+/* Colors */
 :root {
+  /* Primary Colors */
+  --color-primary: 224, 100%, 48%;
+  --color-primary-light: 224, 100%, 70%;
+  --color-primary-dark: 240, 100%, 2%;
+
+  /* Theme */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Neutral Colors */
+  --color-neutral-000: 0, 0%, 100%;
+  --color-neutral-050: 210, 36%, 98%;
+  --color-neutral-100: 210, 27%, 96%;
+  --color-neutral-200: 210, 22%, 88%;
+  --color-neutral-300: 210, 16%, 82%;
+  --color-neutral-400: 213, 12%, 65%;
+  --color-neutral-500: 217, 19%, 52%;
+  --color-neutral-600: 217, 28%, 39%;
+  --color-neutral-700: 217, 33%, 27%;
+  --color-neutral-800: 217, 39%, 18%;
+  --color-neutral-900: 217, 50%, 10%;
+
+  /* State Colors */
+  --color-error: 14, 100%, 66%;
+  --color-notification: 158, 100%, 60%;
+}
+
+/* Spacing */
+:root {
+  --spacing-xs: 0.125rem;
+  /* 2px */
+  --spacing-s: 0.25rem;
+  /* 4px */
+  --spacing-m: 0.5rem;
+  /* 8px */
+  --spacing-mm: 0.75rem;
+  /* 12px */
+  --spacing-l: 1rem;
+  /* 16px */
+  --spacing-xl: 1.5rem;
+  /* 24px */
+  --spacing-2xl: 2rem;
+  /* 32px */
+  --spacing-3xl: 3rem;
+  /* 48px */
+}
+
+/* Border Radius */
+:root {
+  --radius-xs: 0.125rem;
+  /* 2px */
+  --radius-s: 0.25rem;
+  /* 4px */
+  --radius-m: 0.5rem;
+  /* 8px */
+  --radius-l: 1rem;
+  /* 16px */
+  --radius-rounded: 50%;
+  /* Fully rounded */
+}
+
+/* Typography */
+:root {
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-s: 0.875rem;
+  /* 14px */
+  --font-size-m: 1rem;
+  /* 16px */
+  --font-size-l: 1.25rem;
+  /* 20px */
+  --font-size-xl: 1.5rem;
+  /* 24px */
+  --font-size-2xl: 2rem;
+  /* 32px */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,6 +94,8 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--font-size-m);
+  color: hsl(var(--color-neutral-900));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,8 +107,35 @@ body {
 }
 
 a {
-  color: inherit;
+  color: hsl(var(--color-primary));
   text-decoration: none;
+}
+
+a:hover {
+  color: hsl(var(--color-primary-dark));
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  border-radius: var(--radius-m);
+  padding: var(--spacing-s) var(--spacing-m);
+  cursor: pointer;
+}
+
+button.primary {
+  background-color: hsl(var(--color-primary));
+  color: hsl(var(--color-neutral-000));
+}
+
+button.primary:hover {
+  background-color: hsl(var(--color-primary-dark));
 }
 
 @media (prefers-color-scheme: dark) {

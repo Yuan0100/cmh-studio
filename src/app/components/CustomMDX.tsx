@@ -3,6 +3,7 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { MDXComponents } from 'mdx/types'
 import styles from './custom-mdx.module.scss'
+import Image, { ImageProps } from 'next/image'
 
 export const components: MDXComponents = {
   h1: ({ className, ...props }) => (
@@ -42,8 +43,7 @@ export const components: MDXComponents = {
     <blockquote className={`${styles.blockquote} ${className}`} {...props} />
   ),
   img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    //@ts-ignore
-    <Image className={`${styles.image} ${className}`} alt={alt} {...(props as ImageProps)} />
+    <Image className={`${styles.image} ${className}`} {...(props as ImageProps)} alt={alt || ''} width={1080} height={1080} />
   ),
   hr: ({ className, ...props }) => (
     <hr className={`${styles.horizontalRule} ${className}`} {...props} />

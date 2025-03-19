@@ -3,7 +3,7 @@ import path from 'path';
 import { z } from 'zod';
 import { getMDXFiles, parseFrontmatter } from '@/lib/mdx';
 
-const contentDirectory = path.join(process.cwd(), 'src/content/studio');
+const contentDirectory = path.join(process.cwd(), 'src/content/craft');
 
 const MetadataSchema = z.object({
   title: z.string(),
@@ -26,12 +26,14 @@ export type Post = {
   slug: string;
 };
 
-export function getStudioPosts(): Post[] {
+export function getPosts(): Post[] {
   const filePaths = getMDXFiles(contentDirectory);
 
   return filePaths.map(filePath => {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const category = path.basename(path.dirname(filePath));
+    const category = path.basename(path.dirname(filePath)) === contentDirectory.split('/').pop()
+      ? ''
+      : path.basename(path.dirname(filePath));
     const fileName = path.basename(filePath);
     const slug = fileName.replace(/\.(md|mdx)$/, '');
 
@@ -44,6 +46,9 @@ export function getStudioPosts(): Post[] {
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
-  const posts = getStudioPosts();
+  const posts = getPosts();
   return posts.find(post => post.slug === slug);
 }
+
+
+

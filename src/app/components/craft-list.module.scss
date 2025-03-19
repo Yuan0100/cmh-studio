@@ -1,0 +1,19 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
+  gap: var(--spacing-m);
+}
+
+.thumb_area {
+  aspect-ratio: 1 / 1;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
+}

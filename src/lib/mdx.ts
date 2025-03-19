@@ -41,6 +41,9 @@ export function parseFrontmatter<T>(fileContent: string, schema: any, category: 
   const { data: metadata, content } = matter(fileContent);
   metadata.category = category;
 
+  console.log(category);
+
+
   const parsedMetadata = schema.safeParse(metadata);
   if (!parsedMetadata.success) {
     throw new Error(`Invalid front matter: ${parsedMetadata.error.message}`);
