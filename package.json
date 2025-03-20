@@ -13,6 +13,8 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.2.2",
     "@types/mdx": "^2.0.13",
+    "glslCanvas": "^0.2.6",
+    "glslify": "^7.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.483.0",
     "next": "15.2.2",

@@ -10,6 +10,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // Optionally, add any other Next.js config below
   transpilePackages: process.env.NODE_ENV !== "production" ? ["next-mdx-remote"] : undefined,
+  serverExternalPackages: ["glslify"],
   images: {
     remotePatterns: [
       {
