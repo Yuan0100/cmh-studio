@@ -6,6 +6,7 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import rehypeShiki from '@shikijs/rehype';
 import { CompileOptions } from '@mdx-js/mdx';
 import matter from 'gray-matter';
+import { ZodType } from 'zod';
 
 export const mdxOptions: CompileOptions = {
   remarkPlugins: [
@@ -37,7 +38,7 @@ export function getMDXFiles(dir: string): string[] {
   return results;
 }
 
-export function parseFrontmatter<T>(fileContent: string, schema: any, category: string): { content: string, metadata: T } {
+export function parseFrontmatter<T>(fileContent: string, schema: ZodType<T>, category: string): { content: string, metadata: T } {
   const { data: metadata, content } = matter(fileContent);
   metadata.category = category;
 

@@ -2,8 +2,6 @@ import Link from "next/link"
 import styles from "./header.module.scss"
 import { SITE_TITLE } from "../consts"
 
-type Props = {}
-
 const navItems = {
   '/craft': {
     title: 'Craft',
@@ -13,7 +11,7 @@ const navItems = {
   },
 }
 
-export default function Nav({ }: Props) {
+export default function Nav() {
   return (
     <header>
       <div className={styles.container}>

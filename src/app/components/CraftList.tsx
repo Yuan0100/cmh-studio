@@ -4,9 +4,8 @@ import styles from "./craft-list.module.scss"
 import Image from "next/image";
 import CraftCanvas from "./CraftCanvas";
 
-type Props = {}
 
-export default async function CraftList({ }: Props) {
+export default async function CraftList() {
   const posts = getPosts().map(post => ({
     ...post.metadata,
     slug: post.slug,

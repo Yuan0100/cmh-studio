@@ -3,9 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "./page.module.scss";
 
-type Props = {}
-
-export default function CraftPage({ }: Props) {
+export default function CraftPage() {
   return (
     <div className={styles.page}>
       <Header />

@@ -1,9 +1,7 @@
 import { MoveUpRight } from "lucide-react";
 import styles from "./footer.module.scss";
 
-type Props = {}
-
-export default function Footer({ }: Props) {
+export default function Footer() {
   return (
     <footer className={styles.footer}>
       <ul>

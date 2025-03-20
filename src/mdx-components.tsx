@@ -46,8 +46,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <blockquote className={`${styles.blockquote} ${className}`} {...props} />
     ),
     img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-      //@ts-ignore
-      <Image className={`${styles.image} ${className}`} alt={alt} {...(props as ImageProps)} />
+      <Image className={`${styles.image} ${className}`} {...(props as ImageProps)} alt={alt || ''} />
     ),
     hr: ({ className, ...props }) => (
       <hr className={`${styles.horizontalRule} ${className}`} {...props} />
