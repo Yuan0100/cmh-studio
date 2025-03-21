@@ -69,13 +69,13 @@ export async function generateFragmentString(postShaders: PostShader[]): Promise
     if (!shader) return '';
 
     return `
-      region = u_thumbnailRegion${index};
-      if (uv.x >= region.x && uv.x <= region.x + region.z &&
-        uv.y >= region.y && uv.y <= region.y + region.w) {
-        index = ${index + 1};
-        cell_uv = clamp((uv - region.xy) / region.zw, vec2(0.0), vec2(1.0));
-        color = ${shader.function}; 
-      }
+    region = u_thumbnailRegion${index};
+    if (uv.x >= region.x && uv.x <= region.x + region.z &&
+      uv.y >= region.y && uv.y <= region.y + region.w) {
+      index = ${index + 1};
+      cell_uv = clamp((uv - region.xy) / region.zw, vec2(0.0), vec2(1.0));
+      color = ${shader.function}; 
+    } 
     `
   }).join('');
 
@@ -101,10 +101,11 @@ uniform float u_time;
 uniform vec2 u_mouse;
 // uniform float u_scrollY;
 uniform vec2 u_windowMouse;
+uniform float u_borderRadius;
 ${thumbnailUniforms}
 
 vec3 background(vec2 uv) {
-    return vec3(0.0, 1.0, 0.0);
+    return vec3(1.0, 1.0, 1.0);
 }
 
 void main() {
@@ -121,6 +122,8 @@ void main() {
     vec2 cell_uv;
     vec3 color;
     vec4 region;
+
+    color = background(uv);
 
     ${shaderEffects}
 

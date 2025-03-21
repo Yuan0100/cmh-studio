@@ -33,9 +33,11 @@ export default async function CraftPostPage({ params }: Props) {
       <main>
         <h1>{post.metadata.title}</h1>
         <p>{post.metadata.description}</p>
-        <div>
-          <CustomMDX mdxSource={mdxSource} />
-        </div>
+        {post.content && (
+          <div>
+            <CustomMDX mdxSource={mdxSource} />
+          </div>
+        )}
       </main>
       <Footer />
     </div>
