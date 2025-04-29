@@ -3,12 +3,20 @@ title: "Glow Circle"
 description: "A simple glow effect in a circle."
 pubDate: "2022-01-01"
 updateDate: "2022-01-01"
+heroImage: '/assets/craft/aesthetic/1.png'
 shader:
     src: "glow/glow_circle.frag"
-    function: "glow_circle(cell_uv)"
 ---
 
-![Cover](/assets/craft/aesthetic/1.png)
+```glsl
+float circle(vec2 uv, float radius){
+    float dist = length(uv);
+    float circle_dist = abs(dist-radius);//光環大小
+    return circle_dist;
+}
+
+#pragma glslify: export(circle);
+```
 
 # Pluto
 

@@ -1,0 +1,25 @@
+@import '../../styles/breakpoints.scss';
+
+.container {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1056px;
+  margin-top: var(--spacing-xl);
+}
+
+.canvas_container {
+  position: relative;
+  width: 100svw;
+  height: 70svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  z-index: -1;
+  aspect-ratio: 0;
+
+  @media (max-width: $md) {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}

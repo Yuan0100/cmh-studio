@@ -1,8 +1,8 @@
-#pragma glslify: fbm = require('../common/fbm.frag')
-#pragma glslify: glow = require('../common/glow.frag')
+#pragma glslify: fbm = require('./common/fbm.frag')
+#pragma glslify: glow = require('./common/glow.frag')
 
-vec3 breathing_glow(vec2 uv, float u_time){
-    // vec2 uv = gl_FragCoord.xy/u_resolution.xy;
+void main(){
+    vec2 uv = gl_FragCoord.xy/u_resolution.xy;
     // uv.x *= u_resolution.x/u_resolution.y;
     uv= uv*2.0-1.0;
     //陰晴圓缺
@@ -32,10 +32,8 @@ vec3 breathing_glow(vec2 uv, float u_time){
 
     float glow_circle = glow(circle_dist, strength, thickness);
 
-    // gl_FragColor = vec4((vec3(glow_circle)+fog)
-    //     *dir*vec3(1.0, 0.5, 0.25),1.0);
-    return vec3(((glow_circle)+fog)
-        *dir*vec3(1.0, 0.5, 0.25));
+    gl_FragColor = vec4((vec3(glow_circle)+fog)
+        *dir*vec3(1.0, 0.5, 0.25),1.0);
+    // return vec3(((glow_circle)+fog)
+    //     *dir*vec3(1.0, 0.5, 0.25));
 }
-
-#pragma glslify: export(breathing_glow)

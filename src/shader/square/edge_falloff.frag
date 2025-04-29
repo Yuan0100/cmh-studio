@@ -1,5 +1,5 @@
-vec3 edge_fallof(vec2 uv) {
-    // vec2 uv = gl_FragCoord.xy/u_resolution.xy;
+void main() {
+    vec2 uv = gl_FragCoord.xy/u_resolution.xy;
     //uv.x *= u_resolution.x/u_resolution.y;
     uv=fract(uv*3.0);
 
@@ -14,8 +14,5 @@ vec3 edge_fallof(vec2 uv) {
     //float rect2 = smoothstep(0.2, 0.29, abs(uv2.x))
         //+smoothstep(0.6, 0.65, abs(uv2.y));
 
-    // gl_FragColor = vec4(vec3(rect),1.0);
-    return vec3(rect);
+    gl_FragColor = vec4(vec3(rect),1.0);
 }
-
-#pragma glslify: export(edge_fallof);

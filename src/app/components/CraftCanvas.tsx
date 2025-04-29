@@ -5,38 +5,19 @@ import styles from "./craft-canvas.module.scss"
 
 type Props = {
   fragmentString: string;
+  textures: string | undefined;
 }
 
-export default function CraftCanvas({ fragmentString }: Props) {
+export default function CraftCanvas({ fragmentString, textures }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const loadShader = async (fragmentString: string) => {
-
       const canvas = canvasRef.current;
       if (!canvas) return;
 
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
-      const ulElement = document.getElementById('craft-list')
-      if (!ulElement) return;
-
-      const getThumbRegions = () => {
-        const thumbAreas = ulElement.querySelectorAll('.thumb_area');
-        const canvasRect = canvas.getBoundingClientRect();
-        const thumbRegions = Array.from(thumbAreas).map((area, index) => {
-          const rect = area.getBoundingClientRect();
-          return {
-            index,
-            x: (rect.left - canvasRect.left) / canvasRect.width,
-            y: (rect.top - canvasRect.top) / canvasRect.height,
-            width: rect.width / canvasRect.width,
-            height: rect.height / canvasRect.height,
-          };
-        });
-        return thumbRegions;
-      }
 
       // 延遲導入 glslCanvas
       const { default: GlslCanvas } = await import('glslCanvas');
@@ -47,60 +28,36 @@ export default function CraftCanvas({ fragmentString }: Props) {
 
       // Function to resize the canvas and update uniforms
       const handleResize = () => {
-        // Resize the canvas
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
         // Update the resolution uniform
         sandbox.setUniform("u_resolution", canvas.width, canvas.height);
-
-        // Recalculate and update thumbRegions
-        const thumbRegions = getThumbRegions();
-        thumbRegions.forEach(({ index, x, y, width, height }) => {
-          sandbox.setUniform(`u_thumbnailRegion${index}`, x, y, width, height);
-        });
       };
+
+      // const handleMouseMove = (event: MouseEvent) => {
+      //   const mouseX = event.clientX / canvas.width;
+      //   const mouseY = event.clientY / canvas.height;
+      //   sandbox.setUniform("u_mouse", mouseX, mouseY);
+      //   console.log(mouseX, mouseY);
+      // };
 
       // Initial setup
       handleResize();
-
-      // 設置初始 uniform 值
-      // sandbox.setUniform("u_scrollY", window.scrollY / ulElement.clientHeight);
-      // getThumbRegions().forEach(({ index, x, y, width, height }) => {
-      //   sandbox.setUniform(`u_thumbnailRegion${index}`, x, y, width, height);
-      // });
-
-      const handleMouseMove = (event: MouseEvent) => {
-        const mouseX = event.clientX / ulElement.clientWidth;
-        const mouseY = (event.clientY + window.scrollY) / ulElement.clientHeight;
-        sandbox.setUniform("u_windowMouse", mouseX, mouseY);
-        // console.log(mouseX, mouseY);
-      };
-
-      // Scroll handler
-      const handleScroll = () => {
-        const thumbRegions = getThumbRegions();
-        thumbRegions.forEach(({ index, x, y, width, height }) => {
-          sandbox.setUniform(`u_thumbnailRegion${index}`, x, y, width, height);
+      if (textures) {
+        textures.split(',').forEach((texture, index) => {
+          sandbox.setUniform(`u_tex${index}`, `/assets/craft/${texture}`);
         });
-      };
+      }
 
       console.log(sandbox);
 
-      ulElement.addEventListener('mousemove', handleMouseMove);
-
-
       // Add event listeners
-      ulElement.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('resize', handleResize);
-      window.addEventListener('scroll', handleScroll);
+      // canvas.addEventListener('mousemove', handleMouseMove);
 
       // handleScroll();
 
       return () => {
-        ulElement.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('resize', handleResize);
-        window.removeEventListener('scroll', handleScroll);
+        // canvas.removeEventListener('mousemove', handleMouseMove);
       }
     };
 

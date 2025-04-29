@@ -1,8 +1,8 @@
-#pragma glslify: heart = require(../common/heart)
-#pragma glslify: glow = require(../common/glow)
+#pragma glslify: heart = require(./common/heart)
+#pragma glslify: glow = require(./common/glow)
 
-vec3 rectangle(vec2 st) {
-    // vec2 st = gl_FragCoord.xy/u_resolution.xy;
+void main() {
+    vec2 st = gl_FragCoord.xy/u_resolution.xy;
     // st.x *= u_resolution.x/u_resolution.y;
     st= st*2.0-1.0;
     
@@ -22,8 +22,5 @@ vec3 rectangle(vec2 st) {
     
     // color *= vec3(0.491,0.132,0.650);
 
-    // gl_FragColor = vec4(color,1.0);
-    return color;
+    gl_FragColor = vec4(color,1.0);
 }
-
-#pragma glslify: export(rectangle)

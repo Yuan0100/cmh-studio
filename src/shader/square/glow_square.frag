@@ -1,9 +1,9 @@
-#pragma glslify: random = require('../common/random.frag')
-#pragma glslify: square = require('../common/square.frag')
-#pragma glslify: glow = require('../common/glow.frag')
+#pragma glslify: random = require('./common/random.frag')
+#pragma glslify: square = require('./common/square.frag')
+#pragma glslify: glow = require('./common/glow.frag')
 
-vec3 glow_square(vec2 uv) {
-    // vec2 uv = gl_FragCoord.xy/u_resolution.xy;
+void main() {
+    vec2 uv = gl_FragCoord.xy/u_resolution.xy;
     // uv.x *= u_resolution.x/u_resolution.y;
     vec2 uvs = fract(uv * 6.);
     vec2 ipos = floor(uvs);
@@ -15,8 +15,5 @@ vec3 glow_square(vec2 uv) {
     float glow_circle = glow(circle_dist, 0.328, 0.56);
     vec3 color = vec3(glow_circle);
         
-    // gl_FragColor = vec4(color * vec3(.3,.4,.65), 1.0);
-    return color * vec3(.3,.4,.65);
+    gl_FragColor = vec4(color * vec3(.3,.4,.65), 1.0);
 }
-
-#pragma glslify: export(glow_square)

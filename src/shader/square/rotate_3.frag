@@ -1,10 +1,10 @@
-#pragma glslify: rotate2d = require('../common/rotate2d.frag')
-#pragma glslify: random = require('../common/random.frag')
-#pragma glslify: square = require('../common/square.frag')
-#pragma glslify: glow = require('../common/glow.frag')
+#pragma glslify: rotate2d = require('./common/rotate2d.frag')
+#pragma glslify: random = require('./common/random.frag')
+#pragma glslify: square = require('./common/square.frag')
+#pragma glslify: glow = require('./common/glow.frag')
 
-vec3 rotate_3(vec2 uv, float u_time) {
-    // vec2 uv = gl_FragCoord.xy/u_resolution.xy;
+void main() {
+    vec2 uv = gl_FragCoord.xy/u_resolution.xy;
     // uv.x *= u_resolution.x/u_resolution.y;
     
     float glow_draw;
@@ -29,8 +29,5 @@ vec3 rotate_3(vec2 uv, float u_time) {
         //float glow_draw = exp(-draw*800.0); //3rd method
     }
 
-    // gl_FragColor = vec4(vec3(glow_draw),1.0);
-    return vec3(glow_draw);
+    gl_FragColor = vec4(vec3(glow_draw),1.0);
 } 
-
-#pragma glslify: export(rotate_3);

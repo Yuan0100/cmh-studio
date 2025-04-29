@@ -1,14 +1,14 @@
-#pragma glslify: rotate2d = require('../common/rotate2d.frag');
-#pragma glslify: square = require('../common/square.frag');
-#pragma glslify: glow = require('../common/glow.frag');
+#pragma glslify: rotate2d = require('./common/rotate2d.frag');
+#pragma glslify: square = require('./common/square.frag');
+#pragma glslify: glow = require('./common/glow.frag');
 
 float mouseArea(vec2 pos, vec2 mouse, float radius) {
     float dist = distance(pos, mouse);
     return smoothstep(radius, radius - 0.01, dist);
 }
 
-vec3 mouse_interaction(vec2 uv, vec2 u_mouse, float u_time) {
-  // vec2 uv = gl_FragCoord.xy/u_resolution.xy;
+void main() {
+  vec2 uv = gl_FragCoord.xy/u_resolution.xy;
   // uv.x *= u_resolution.x/u_resolution.y;
   float tilingSize=20.0;
   vec2 Mymouse= u_mouse.xy;
@@ -33,8 +33,5 @@ vec3 mouse_interaction(vec2 uv, vec2 u_mouse, float u_time) {
   float glow_draw = glow(draw, 0.5, 0.076); //2nd method
   //float glow_draw = exp(-draw*800.0); //3rd method
 
-  // gl_FragColor = vec4(vec3(area),1.0);
-  return vec3(area);
+  gl_FragColor = vec4(vec3(area),1.0);
 }
-
-#pragma glslify: export(mouse_interaction);
