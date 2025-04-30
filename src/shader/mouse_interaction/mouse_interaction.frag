@@ -2,16 +2,16 @@
 #pragma glslify: square = require('./common/square.frag');
 #pragma glslify: glow = require('./common/glow.frag');
 
-float mouseArea(vec2 pos, vec2 mouse, float radius) {
-    float dist = distance(pos, mouse);
-    return smoothstep(radius, radius - 0.01, dist);
+float mouseArea(vec2 uv, vec2 mouse, float size){
+    float dist=length(uv-mouse);
+    return 1.0-smoothstep( size, 2.5* size, dist);
 }
 
 void main() {
   vec2 uv = gl_FragCoord.xy/u_resolution.xy;
   // uv.x *= u_resolution.x/u_resolution.y;
   float tilingSize=20.0;
-  vec2 Mymouse= u_mouse.xy;
+  vec2 Mymouse= u_mouse.xy / u_resolution.xy;
   // vec2 Mymouse = vec2(0.5, 0.5);;
   vec2 iMouse = floor(Mymouse*20.0)/20.0;
   
