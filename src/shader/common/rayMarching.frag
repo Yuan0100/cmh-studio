@@ -1,3 +1,5 @@
+#pragma glslify: GetDist = require('./getDist.frag');
+
 float rayMarching(vec3 ro,vec3 rd){
         float dO = 0.;
         for(int i = 0 ; i < 64 ; i++){

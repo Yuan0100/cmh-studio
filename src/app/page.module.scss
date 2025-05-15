@@ -1,3 +1,9 @@
+.canvas {
+  width: 100svw;
+  height: 70svh;
+  background-color: hsl(var(--color-neutral-800));
+}
+
 .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);

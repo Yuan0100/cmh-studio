@@ -4,6 +4,7 @@
 #pragma glslify: gradient = require('./common/gradient.frag')
 #pragma glslify: triplanarMap = require('./common/triplanarMap.frag')
 #pragma glslify: getSkyAll = require('./common/getSkyAll.frag')
+#pragma glslify: calcAO = require('./common/calcAO.frag')
 
 void main(){
     vec2 uv = gl_FragCoord.xy/u_resolution.xy;
@@ -44,7 +45,7 @@ void main(){
             
     //SHADING
         vec3 result=n;
-        result = vec3(edge); 
+        result = vec3(calcAO(p,n)); 
         
     //HDR環境貼圖
         vec3 BG=getSkyAll(RayDir);//或getSkyFBM(RayDir)

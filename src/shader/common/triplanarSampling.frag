@@ -1,3 +1,5 @@
+#pragma glslify: smoothSampling2 = require('./smoothSampling2.frag');
+
 float triplanarSampling(vec3 p, vec3 n)
 {
     float fTotal = abs(n.x)+abs(n.y)+abs(n.z);

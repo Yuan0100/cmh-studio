@@ -1,3 +1,11 @@
+#pragma glslify: fromEuler = require('./common/fromEuler.frag')
+#pragma glslify: setCamera = require('./common/setCamera.frag')
+#pragma glslify: phong = require('./common/phong.frag')
+#pragma glslify: triplanarMap = require('./common/triplanarMap.frag')
+#pragma glslify: getSkyALL = require('./common/getSkyALL.frag')
+#pragma glslify: trace = require('./common/trace.frag')
+#pragma glslify: gradient = require('./common/gradient.frag')
+
 void main(){
         vec2 uv = gl_FragCoord.xy/u_resolution.xy;
         uv = uv*2.0-1.0;
@@ -10,7 +18,8 @@ void main(){
             vec3 CameraRot=vec3(0.0, -0.8, 0.0);
             vec3 ro= vec3(0.0, 0.0, 2.0)*fromEuler(CameraRot);//CameraPos;
             vec3 ta =vec3(0.0, 0.0, 0.0); //TargetPos; /
-            /vec3 ta =float3(CameraDir.x, CameraDir.z, CameraDir.y);
+            vec3 CameraDir=normalize(ro - ta); //CameraDir;
+            // ta =float3(CameraDir.x, CameraDir.z, CameraDir.y);
             //UE座標Z軸在上
 
             mat3 ca = setCamera( ro, ta, 0.0 );
@@ -27,9 +36,9 @@ void main(){
         */
             
         vec3 p,n;
-        float t = trace(RayOri, RayDir, p);
+        float t = trace(RayOri, RayDir);
         n=normalize(gradient(p));
-        vec3 bump=normalMap(p*1.652,n);
+        vec3 bump=triplanarMap(p*1.652,n);
         
         float edge= dot(-RayDir, n);
         //edge = step(0.2, edge);

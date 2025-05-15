@@ -1,31 +1,18 @@
 import Link from "next/link"
 import styles from "./header.module.scss"
 import { SITE_TITLE } from "../consts"
+import Navbar from "./Navbar"
 
-const navItems = {
-  '/craft': {
-    title: 'Craft',
-  },
-  '/about': {
-    title: 'About',
-  },
-}
-
-export default function Nav() {
+export default function Header() {
   return (
     <header>
       <div className={styles.container}>
-        <Link href="/">
-          {SITE_TITLE}
-        </Link>
-        <nav className={styles.nav}>
-          {Object.entries(navItems).map(([path, { title }]) => (
-            <Link key={path
-            } href={path}>
-              {title}
-            </Link>
-          ))}
-        </nav>
+        <div className={styles.title}>
+          <Link href="/">
+            {SITE_TITLE}
+          </Link>
+        </div>
+        <Navbar />
       </div>
     </header>
   )

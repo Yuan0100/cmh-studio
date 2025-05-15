@@ -1,3 +1,5 @@
+#pragma glslify: triplanarSampling = require('./triplanarSampling.frag');
+
 const mat2 m2 = mat2(0.90,0.44,-0.44,0.90);
 float triplanarNoise(vec3 p, vec3 n)
 {

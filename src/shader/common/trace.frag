@@ -1,6 +1,6 @@
 #pragma glslify: map = require(./map.frag);
 
-float trace(vec3 o, vec3 r, vec3 p)
+float trace(vec3 o, vec3 r)
 {
     float t=0.0;
     for (int i=0; i<32; ++i)

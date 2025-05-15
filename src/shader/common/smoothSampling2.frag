@@ -1,3 +1,5 @@
+#pragma glslify: gnoise = require('./gnoise.frag');
+
 vec3 smoothSampling2(vec2 uv)
 {
     const float T_RES = 32.0;

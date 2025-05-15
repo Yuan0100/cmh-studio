@@ -1,7 +1,6 @@
 #pragma glslify: fbm = require('./common/fbm.frag')
 #pragma glslify: fromEuler = require('./common/fromEuler.frag')
 #pragma glslify: setCamera = require('./common/setCamera.frag')
-#pragma glslify: map = require('./common/map.frag')
 #pragma glslify: trace = require('./common/trace.frag')
 #pragma glslify: gradient = require('./common/gradient.frag')
 #pragma glslify: getSkyALL = require('./common/getSkyALL.frag')
@@ -41,7 +40,7 @@ void main(){
     //SHADING
         vec3 result;
         result=(p);
-        //result=(n);
+        // result=(n);
         
     //HDR環境貼圖
         vec3 BG=getSkyALL(RayDir);	   //或getSkyFBM(RayDir)

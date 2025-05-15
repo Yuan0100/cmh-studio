@@ -2,6 +2,9 @@
 #pragma glslify: setCamera = require('./common/setCamera.frag')
 #pragma glslify: trace = require('./common/trace.frag')
 #pragma glslify: gradient = require('./common/gradient.frag')
+#pragma glslify: triplanarMap = require('./common/triplanarMap.frag')
+#pragma glslify: flameColour = require('./common/flameColour.frag')
+#pragma glslify: getSkyAll = require('./common/getSkyAll.frag')
 
 void main(){
     vec2 uv = gl_FragCoord.xy/u_resolution.xy;
@@ -17,7 +20,7 @@ void main(){
         //vec3 ta =float3(CameraDir.x, CameraDir.z, CameraDir.y);
         //UE座標Z軸在上
 
-        mat3 ca = setCamera( ro, ta, 0.0 );
+        mat3 ca = setCamera( ro, ta, 01.0 );
         vec3 RayDir = ca*normalize(vec3(uv, 2.0));
         //z值越大則zoom in，可替換成iMouse.z
         
@@ -31,7 +34,7 @@ void main(){
     */
         
     vec3 p,n;
-    float t = trace(RayOri, RayDir, p);
+    float t = trace(RayOri, RayDir);
     n=normalize(gradient(p));
     
     //sol2
@@ -42,8 +45,8 @@ void main(){
     */
 
     //sol3
-    vec3 bump = normalMap(p*1.6,n);//調整bumping密度
-    n += bump*2.;
+    vec3 bump = triplanarMap(p*1.6,n);//調整bumping密度
+    // n += bump*2.; // ⚠️ 這個數值會讓圖形渲染超出 canvas ，甚至超過 browser 範圍，讓整個螢幕看起來像是壞掉 ⚠️
 
     float edge = dot(-RayDir,n);
     //RayDir : 相機看出去的方向
@@ -54,10 +57,10 @@ void main(){
 
     //SHADING
         vec3 result=n;
-        result = vec3(edge)*FlameColour(edge);
+        result = vec3(edge)*flameColour(edge);
     
     //HDR環境貼圖
-        vec3 BG=getSkyALL(RayDir);	   //或getSkyFBM(RayDir)
+        vec3 BG=getSkyAll(RayDir);	   //或getSkyFBM(RayDir)
     
     //亂數作用雲霧(二維)
     //float fog= fbm(0.6*uv+vec2(-0.2*u_time, -0.02*u_time))*0.5+0.3;
