@@ -5,7 +5,7 @@ import Navbar from "./Navbar"
 
 export default function Header() {
   return (
-    <header>
+    <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.title}>
           <Link href="/">

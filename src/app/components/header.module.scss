@@ -1,9 +1,20 @@
-.container {
+.header {
   position: fixed;
+  top: 0;
   width: 100%;
-  background-color: hsl(var(--background));
-  display: flex;
-  justify-content: space-between;
+  background-color: var(--background);
+  z-index: 100;
+  padding: var(--spacing-m) var(--spacing-xl);
 }
 
-.title {}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--font-size-m);
+  font-weight: bold;
+  letter-spacing: var(--spacing-xs);
+}

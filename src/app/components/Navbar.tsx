@@ -7,6 +7,9 @@ const navItems = {
   '/craft': {
     title: 'Craft',
   },
+  '/resources': {
+    title: 'Resources',
+  },
   '/about': {
     title: 'About',
   },

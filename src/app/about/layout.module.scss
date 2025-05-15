@@ -1,0 +1,6 @@
+@use '../styles/breakpoints';
+
+.container {
+  max-width: breakpoints.$md;
+  margin: 0 var(--spacing-xl);
+}
