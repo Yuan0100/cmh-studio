@@ -34,7 +34,7 @@ void main(){
     */
         
     vec3 p,n;
-    float t = trace(RayOri, RayDir);
+    float t = trace(RayOri, RayDir, p);
     n=normalize(gradient(p));
     
     //sol2

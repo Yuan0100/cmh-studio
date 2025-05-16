@@ -36,7 +36,7 @@ void main(){
         */
             
         vec3 p,n;
-        float t = trace(RayOri, RayDir);
+        float t = trace(RayOri, RayDir, p);
         n=normalize(gradient(p));
         vec3 bump=triplanarMap(p*1.652,n);
         

@@ -34,7 +34,7 @@ void main(){
     */
         
     vec3 p,n;
-    float t = trace(RayOri, RayDir); //position
+    float t = trace(RayOri, RayDir, p); //position
     n=normalize(gradient(p)); //normal
             
     //SHADING
