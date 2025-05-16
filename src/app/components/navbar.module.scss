@@ -1,4 +1,35 @@
+@use '../styles/breakpoints.scss';
+
 .nav {
   display: flex;
   gap: var(--spacing-xl);
+}
+
+.nav_menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xl);
+
+  @media(max-width: breakpoints.$md) {
+    &.open {
+      z-index: 100;
+
+      position: fixed;
+      right: 0;
+      top: 0;
+      flex-direction: column;
+      font-size: var(--font-size-2xl);
+      align-items: end;
+      padding: var(--spacing-xl);
+      background-color: hsl(var(--color-neutral-000));
+      width: 100svw;
+      height: 100svh;
+
+      a {
+        color: hsl(var(--color-neutral-800));
+      }
+    }
+  }
 }

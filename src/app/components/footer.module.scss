@@ -1,10 +1,11 @@
 .footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-top: var(--spacing-3xl);
   padding: var(--spacing-l) 0;
+  gap: var(--spacing-l);
 }
 
 .footer_link {

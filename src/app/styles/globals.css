@@ -107,7 +107,7 @@ body {
 }
 
 main {
-  margin-top: var(--spacing-3xl);
+  /* margin-top: var(--spacing-3xl); */
   min-height: calc(100svh - var(--spacing-3xl));
 }
 
