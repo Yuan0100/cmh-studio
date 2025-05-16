@@ -9,6 +9,7 @@ export default function CraftPage() {
       <Header />
       <main>
         <div className={styles.container}>
+          <h1>Crafts</h1>
           <CraftList />
         </div>
       </main>

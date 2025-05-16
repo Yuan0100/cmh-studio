@@ -34,25 +34,22 @@ export default function CraftCanvas({ fragmentString, textures }: Props) {
 
   // Handle window resize and set canvas size
   useEffect(() => {
-    if (!sandbox) return;
-
     const container = canvasContaienrRef.current;
-    if (!container) return;
-    const canvas = container.querySelector('canvas');
-    if (!canvas) return;
+    const canvas = sandbox?.canvas;
+    if (!canvas || !container) return;
 
-    // Scale the canvas to the device pixel ratio
-    const scale = window.devicePixelRatio;
-    const canvasWidth = window.innerWidth > window.innerHeight ? window.innerHeight * 0.7 : window.innerWidth;
-    const canvasHeight = window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight * 0.7;
+    const resolutionScale = 1;
 
     const handleResize = () => {
-      canvas.width = canvasWidth * scale;
-      canvas.height = canvasHeight * scale;
+      const scale = window.devicePixelRatio * resolutionScale;
+      const canvasWidth = container.getBoundingClientRect().width - container.clientLeft * 2;
+      const canvasHeight = container.getBoundingClientRect().height - container.clientTop * 2;
+      canvas.width = Math.floor(canvasWidth * scale);
+      canvas.height = Math.floor(canvasHeight * scale);
+      // console.log(container.getBoundingClientRect().width, container.getBoundingClientRect().height);
 
-      // Update the resolution uniform
       sandbox.setUniform("u_resolution", canvas.width, canvas.height);
-    }
+    };
 
     // Initial setup
     handleResize();
@@ -74,8 +71,7 @@ export default function CraftCanvas({ fragmentString, textures }: Props) {
     <div ref={canvasContaienrRef} className={styles.container}>
       <canvas
         ref={canvasRef}
-        className="glslCanvas"
-        style={{ maxWidth: '100%', maxHeight: '100%' }}
+        className={`glslCanvas ${styles.glsl_canvas}`}
       ></canvas>
     </div>
   )
