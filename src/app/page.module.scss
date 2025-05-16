@@ -1,3 +1,5 @@
+@use './styles/breakpoints.scss';
+
 .canvas {
   width: 100svw;
   height: 70svh;
@@ -14,6 +16,10 @@
 
   min-height: 100svh;
   font-family: var(--font-geist-sans), var(--font-noto-sans-tc);
+}
+
+.container {
+  margin: var(--spacing-xl);
 }
 
 @media (prefers-color-scheme: dark) {

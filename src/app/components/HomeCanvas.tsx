@@ -10,66 +10,66 @@ type Props = {
 
 export default function HomeCanvas({ fragmentString, textures }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasContaienrRef = useRef<HTMLDivElement>(null);
+  const [sandbox, setSandbox] = useState<any>(null);
 
+  // Load the shader when the component mounts
   useEffect(() => {
+    const container = canvasContaienrRef.current;
+    const canvas = canvasRef.current;
+
+    if (!canvas || !container) return;
+
     const loadShader = async (fragmentString: string) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      // 延遲導入 glslCanvas
       const { default: GlslCanvas } = await import('glslCanvas');
       const sandbox = new GlslCanvas(canvas);
+      setSandbox(sandbox);
 
-      // 加載著色器代碼
       sandbox.load(fragmentString);
-
-      // Function to resize the canvas and update uniforms
-      const handleResize = () => {
-        // Update the resolution uniform
-        sandbox.setUniform("u_resolution", canvas.width, canvas.height);
-      };
-
-      // const handleMouseMove = (event: MouseEvent) => {
-      //   const mouseX = event.clientX / canvas.width;
-      //   const mouseY = event.clientY / canvas.height;
-      //   sandbox.setUniform("u_mouse", mouseX, mouseY);
-      //   console.log(mouseX, mouseY);
-      // };
-
-      // Initial setup
-      handleResize();
-      if (textures) {
-        textures.split(',').forEach((texture, index) => {
-          sandbox.setUniform(`u_tex${index}`, `/data/${texture.trim()}`);
-        });
-      }
-
-      console.log(sandbox);
-
-      // Add event listeners
-      window.addEventListener('resize', handleResize);
-      // canvas.addEventListener('mousemove', handleMouseMove);
-
-      // handleScroll();
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        // canvas.removeEventListener('mousemove', handleMouseMove);
-      }
-    };
+    }
 
     loadShader(fragmentString);
-  }, [fragmentString])
+  }, [])
+
+  // Handle window resize and set canvas size
+  useEffect(() => {
+    if (!sandbox) return;
+    const canvas = sandbox.canvas;
+
+    const resolutionScale = 0.25;
+
+    const handleResize = () => {
+      const scale = window.devicePixelRatio * resolutionScale;
+      const canvasWidth = window.innerWidth;
+      const canvasHeight = window.innerWidth > 768 ? window.innerHeight * 0.7 : window.innerWidth;
+      canvas.width = Math.floor(canvasWidth * scale);
+      canvas.height = Math.floor(canvasHeight * scale);
+
+      sandbox.setUniform("u_resolution", canvas.width, canvas.height);
+    };
+
+    // Initial setup
+    handleResize();
+    if (textures) {
+      textures.split(',').forEach((texture, index) => {
+        sandbox.setUniform(`u_tex${index}`, `/assets/craft/${texture}`);
+      });
+    }
+    // Add event listeners
+    window.addEventListener('resize', handleResize);
+
+    // Remove event listeners on cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, [sandbox, textures])
 
   return (
-    <div className={styles.container}>
+    <div ref={canvasContaienrRef} className={styles.container}>
       <canvas
         ref={canvasRef}
-        className="glslCanvas"
-        style={{ width: '100%', height: '100%' }}
+        className={`glslCanvas ${styles.glsl_canvas}`}
       ></canvas>
     </div>
   )
