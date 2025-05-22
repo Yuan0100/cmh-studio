@@ -20,9 +20,7 @@ export default async function CraftList() {
     return acc;
   }, {} as Record<string, typeof posts>);
 
-  console.log(groupedPosts);
-
-
+  // console.log(groupedPosts);
 
   return (
     <div className={styles.container}>

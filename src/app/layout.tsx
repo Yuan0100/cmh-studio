@@ -56,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-tw">
-      <body className={`${notoSansTC.variable} ${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${notoSansTC.variable} ${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
         {children}
       </body>
     </html>
