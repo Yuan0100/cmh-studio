@@ -1,3 +1,6 @@
+#pragma glslify: hash12 = require(./hash12.frag)
+
+
 float noise_3(in vec3 p) {
     vec3 i = floor(p);
     vec3 f = fract(p);	
