@@ -8,6 +8,9 @@
   z-index: 100;
   padding: var(--spacing-l) var(--spacing-xl);
   mix-blend-mode: difference;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   a {
     color: hsl(var(--color-neutral-000));
@@ -15,17 +18,26 @@
 
   @media(max-width: breakpoints.$md) {
     mix-blend-mode: normal;
+
+    a {
+      color: hsl(var(--color-neutral-900));
+    }
   }
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: var(--spacing-l) var(--spacing-xl);
+  z-index: 200;
   font-size: var(--font-size-m);
   font-weight: bold;
   letter-spacing: var(--spacing-xs);
+  white-space: nowrap;
+  mix-blend-mode: difference;
+
+  a {
+    color: hsl(var(--color-neutral-000));
+  }
 }
