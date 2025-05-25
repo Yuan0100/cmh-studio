@@ -27,13 +27,13 @@ uniform vec2 u_mouse;
 
   // Resolve includes asynchronously
   const resolvedShaderContent = await resolveLygiaAsync(
-    glslify(shaderContent, { basedir: "./src/shader", })
+    glslify(shaderContent, { basedir: "src/shader", })
   );
 
   const shaderString = shaderBase + "\n" + resolvedShaderContent;
 
   const content = glslify(shaderString, {
-    basedir: "./src/shader",
+    basedir: "src/shader",
   });
 
   // console.log('Log from craft/[slug]/utils.ts: ', content);
