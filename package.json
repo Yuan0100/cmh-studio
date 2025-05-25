@@ -14,7 +14,7 @@
     "@next/mdx": "^15.2.2",
     "@types/mdx": "^2.0.13",
     "glsl-map": "^1.0.1",
-    "glslCanvas": "^0.2.6",
+    "glslCanvas": "github:Yuan0100/glslCanvas",
     "glslify": "^7.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.483.0",

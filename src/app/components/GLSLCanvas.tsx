@@ -6,14 +6,15 @@ import styles from "./glsl-canvas.module.scss";
 type Props = {
   fragmentString: string;
   textures?: string;
-  resolutionScale?: number;
+  pixelRatio?: number;
   className?: string; // 傳入不同的 container 樣式
+  canvasClassName?: string; // 傳入不同的 canvas 樣式
 };
 
 export default function GLSLCanvas({
   fragmentString,
   textures,
-  resolutionScale = 0.75,
+  pixelRatio = 0.75,
   className = "",
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -32,13 +33,14 @@ export default function GLSLCanvas({
 
     // 初始化 shader 前先 resize
     setCanvasDisplaySize(container, canvas);
-    setCanvasResolution(container, canvas, resolutionScale);
+    setCanvasResolution(container, canvas, pixelRatio);
 
     const loadShader = async (fragmentString: string) => {
       const { default: GlslCanvas } = await import('glslCanvas');
-      const sandbox = new GlslCanvas(canvas);
+      const sandbox = new GlslCanvas(canvas, { pixelRatio });
       setSandbox(sandbox);
       sandbox.load(fragmentString);
+      sandbox.resize();
     };
     loadShader(fragmentString);
   }, [fragmentString]);
@@ -58,21 +60,14 @@ export default function GLSLCanvas({
     const canvas = sandbox?.canvas;
     if (!canvas || !container) return;
 
-    const resize = () => {
+    const rsize = () => {
       setCanvasDisplaySize(container, canvas);
-      requestAnimationFrame(() => {
-        setCanvasResolution(container, canvas, resolutionScale);
-      });
-    };
+      sandbox.resize();
+    }
 
-    // 初始呼叫一次
-    resize();
-
-    const observer = new window.ResizeObserver(resize);
-    observer.observe(container);
-
+    window.addEventListener('resize', rsize);
     return () => {
-      observer.disconnect();
+      window.removeEventListener('resize', rsize);
     };
   }, [sandbox])
 
@@ -88,11 +83,11 @@ export default function GLSLCanvas({
   function setCanvasResolution(
     container: HTMLDivElement,
     canvas: HTMLCanvasElement,
-    resolutionScale: number
+    pixelRatio: number
   ) {
     const rect = container.getBoundingClientRect();
-    const pixelWidth = Math.floor(rect.width * resolutionScale);
-    const pixelHeight = Math.floor(rect.height * resolutionScale);
+    const pixelWidth = Math.floor(rect.width * pixelRatio);
+    const pixelHeight = Math.floor(rect.height * pixelRatio);
     canvas.width = pixelWidth;
     canvas.height = pixelHeight;
   }

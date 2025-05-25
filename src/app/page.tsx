@@ -25,8 +25,9 @@ export default async function Home() {
         <GLSLCanvas
           fragmentString={fragmentString}
           // textures=""
-          // resolutionScale={0.5}
+          // pixelRatio={0.5}
           className={styles.canvas_container}
+          canvasClassName={styles.canvas}
         />
         {/* <HomeCanvas fragmentString={fragmentString} /> */}
         {/* <HomeCanvas fragmentString={fragmentString} textures="MonaLisa.jpg,Taipei101_1.jpeg" /> */}
