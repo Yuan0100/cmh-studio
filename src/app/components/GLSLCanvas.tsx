@@ -13,12 +13,17 @@ type Props = {
 export default function GLSLCanvas({
   fragmentString,
   textures,
-  resolutionScale = 0.25,
+  resolutionScale = 0.75,
   className = "",
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [sandbox, setSandbox] = useState<any>(null);
+
+  // useEffect(() => {
+  //   // 設定較低 devicePixelRatio 改善效能
+  //   window.devicePixelRatio = 0.75;
+  // }, [])
 
   useEffect(() => {
     const container = containerRef.current;
@@ -26,9 +31,8 @@ export default function GLSLCanvas({
     if (!canvas || !container) return;
 
     // 初始化 shader 前先 resize
-    // resizeCanvas(container, canvas, null, resolutionScale);
     setCanvasDisplaySize(container, canvas);
-    setCanvasResolution(container, canvas, sandbox, resolutionScale);
+    setCanvasResolution(container, canvas, resolutionScale);
 
     const loadShader = async (fragmentString: string) => {
       const { default: GlslCanvas } = await import('glslCanvas');
@@ -37,7 +41,7 @@ export default function GLSLCanvas({
       sandbox.load(fragmentString);
     };
     loadShader(fragmentString);
-  }, [fragmentString, resolutionScale]);
+  }, [fragmentString]);
 
   useEffect(() => {
     if (!sandbox) return;
@@ -55,30 +59,22 @@ export default function GLSLCanvas({
     if (!canvas || !container) return;
 
     const resize = () => {
-      // 用 requestAnimationFrame 確保 layout 完成
       setCanvasDisplaySize(container, canvas);
       requestAnimationFrame(() => {
-        setCanvasResolution(container, canvas, sandbox, resolutionScale);
-      })
+        setCanvasResolution(container, canvas, resolutionScale);
+      });
     };
 
     // 初始呼叫一次
     resize();
 
-    // const observer = new window.ResizeObserver(resize);
-    // observer.observe(container);
-
-    // return () => {
-    //   observer.disconnect();
-    // };
-
-    window.addEventListener('resize', resize);
+    const observer = new window.ResizeObserver(resize);
+    observer.observe(container);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      observer.disconnect();
     };
-  }, [sandbox, resolutionScale]);
-
+  }, [sandbox])
 
   function setCanvasDisplaySize(
     container: HTMLDivElement,
@@ -92,7 +88,6 @@ export default function GLSLCanvas({
   function setCanvasResolution(
     container: HTMLDivElement,
     canvas: HTMLCanvasElement,
-    sandbox: any,
     resolutionScale: number
   ) {
     const rect = container.getBoundingClientRect();
@@ -100,9 +95,6 @@ export default function GLSLCanvas({
     const pixelHeight = Math.floor(rect.height * resolutionScale);
     canvas.width = pixelWidth;
     canvas.height = pixelHeight;
-    // if (sandbox) {
-    //   sandbox.setUniform("u_resolution", [pixelWidth, pixelHeight]);
-    // }
   }
 
   return (

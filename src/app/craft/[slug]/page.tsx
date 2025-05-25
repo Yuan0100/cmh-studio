@@ -39,7 +39,7 @@ export default async function CraftPostPage({ params }: Props) {
         <GLSLCanvas
           fragmentString={fragmentString}
           textures={post.metadata.shader?.textures}
-          resolutionScale={0.5}
+          // resolutionScale={0.5}
           className={styles.canvas_container}
         />
       </div>
