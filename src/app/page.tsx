@@ -1,7 +1,7 @@
 import styles from "./page.module.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { generateFragmentString, WORK_SHADERS, WorkShaderType } from "./utils";
+import { generateFragmentString } from "./utils";
 import GLSLCanvas from "./components/GLSLCanvas";
 
 export default async function Home() {

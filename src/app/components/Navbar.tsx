@@ -5,7 +5,6 @@ import styles from "./navbar.module.scss";
 import { useState } from "react";
 import { AlignRight, X } from "lucide-react";
 
-type Props = {}
 
 const navItems = {
   '/craft': {
@@ -19,7 +18,7 @@ const navItems = {
   },
 }
 
-export default function Navbar({ }: Props) {
+export default function Navbar({ }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLinkClick = () => {

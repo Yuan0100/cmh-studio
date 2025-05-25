@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 export const xs = 360;
 export const sm = 576;
@@ -62,23 +62,23 @@ function isMobile() {
   return isMobile || isIPadOS;
 }
 
-const useMediaSelectTo = breakpoint => {
-  const [matched, setMatched] = useState(false);
+// const useMediaSelectTo = breakpoint => {
+//   const [matched, setMatched] = useState(false);
 
-  useEffect(() => {
-    function handler(x) {
-      setMatched(x.matches);
-    }
-    const x = window.matchMedia(`(max-width: ${breakpoint}px)`)
-    handler(x);
-    x.addEventListener('change', handler);
+//   useEffect(() => {
+//     function handler(x) {
+//       setMatched(x.matches);
+//     }
+//     const x = window.matchMedia(`(max-width: ${breakpoint}px)`)
+//     handler(x);
+//     x.addEventListener('change', handler);
 
-    return () => {
-      x.removeEventListener('change', handler);
-    }
-  }, [breakpoint])
+//     return () => {
+//       x.removeEventListener('change', handler);
+//     }
+//   }, [breakpoint])
 
-  return matched;
-}
+//   return matched;
+// }
 
 export { respondTo, respondFrom, breakpoints, toRespond, attrToRespond, isMobile };

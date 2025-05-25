@@ -20,7 +20,7 @@ export default function CodeBlock({ codeString }: Props) {
       setCodeHtml(html);
     }
     getHtml();
-  }, [])
+  }, [codeString])
 
   return (<>{codeHtml && (
     <div className={styles.codeBlock} dangerouslySetInnerHTML={{ __html: codeHtml }} />

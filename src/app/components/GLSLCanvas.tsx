@@ -11,6 +11,13 @@ type Props = {
   canvasClassName?: string; // 傳入不同的 canvas 樣式
 };
 
+interface GLSLSandbox {
+  load: (fragmentString: string) => void;
+  resize: () => void;
+  setUniform: (name: string, value: unknown) => void;
+  canvas: HTMLCanvasElement;
+}
+
 export default function GLSLCanvas({
   fragmentString,
   textures,
@@ -19,7 +26,7 @@ export default function GLSLCanvas({
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [sandbox, setSandbox] = useState<any>(null);
+  const [sandbox, setSandbox] = useState<GLSLSandbox | null>(null);
 
   // useEffect(() => {
   //   // 設定較低 devicePixelRatio 改善效能
@@ -43,7 +50,7 @@ export default function GLSLCanvas({
       sandbox.resize();
     };
     loadShader(fragmentString);
-  }, [fragmentString]);
+  }, [fragmentString, pixelRatio]);
 
   useEffect(() => {
     if (!sandbox) return;
