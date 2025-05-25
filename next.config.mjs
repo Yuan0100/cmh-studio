@@ -9,13 +9,13 @@ const nextConfig = {
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // Optionally, add any other Next.js config below
-  transpilePackages: process.env.NODE_ENV !== "production" ? ["next-mdx-remote"] : undefined,
+  // transpilePackages: process.env.NODE_ENV !== "production" ? ["next-mdx-remote"] : undefined,
   serverExternalPackages: ["glslify"],
   images: {
     remotePatterns: [
       {
         protocol: process.env.NODE_ENV === "production" ? 'https' : 'http',
-        hostname: process.env.NODE_ENV === "production" ? 'example.com' : 'localhost',
+        hostname: process.env.NODE_ENV === "production" ? 'cmh-studio.vercel.app' : 'localhost',
         port: '',
         pathname: '/assets/**',
         search: '',
