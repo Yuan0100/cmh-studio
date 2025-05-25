@@ -36,6 +36,6 @@ uniform vec2 u_mouse;
     basedir: "./src/shader",
   });
 
-  console.log('Log from utils.ts: ', content);
+  // console.log('Log from craft/[slug]/utils.ts: ', content);
   return content;
 }
