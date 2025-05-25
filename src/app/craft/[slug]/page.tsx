@@ -1,8 +1,8 @@
 import { getPostBySlug, getPosts } from "../utils";
 import { notFound } from "next/navigation";
-import { serialize } from "next-mdx-remote/serialize";
-import CustomMDX from "@/app/components/CustomMDX";
-import { mdxOptions } from "@/lib/mdx";
+// import { serialize } from "next-mdx-remote/serialize";
+// import CustomMDX from "@/app/components/CustomMDX";
+// import { mdxOptions } from "@/lib/mdx";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import styles from "./page.module.scss";
@@ -24,11 +24,11 @@ export default async function CraftPostPage({ params }: Props) {
     notFound();
   }
 
-  const mdxSource = await serialize(post.content, {
-    scope: {},
-    mdxOptions,
-    parseFrontmatter: true,
-  });
+  // const mdxSource = await serialize(post.content, {
+  //   scope: {},
+  //   mdxOptions,
+  //   parseFrontmatter: true,
+  // });
 
   const fragmentString = await generateFragmentString(post.metadata.shader);
 
@@ -48,11 +48,11 @@ export default async function CraftPostPage({ params }: Props) {
           <h1>{post.metadata.title}</h1>
           <p>{post.metadata.description}</p>
           <CodeBlock codeString={fragmentString} />
-          {post.content && (
+          {/* {post.content && (
             <div>
               <CustomMDX mdxSource={mdxSource} />
             </div>
-          )}
+          )} */}
         </main>
       </div>
       <Footer />
@@ -64,7 +64,7 @@ export async function generateStaticParams() {
   const posts = getPosts()
 
   const paths = posts.map(post => ({
-    params: { slug: post.slug },
+    slug: post.slug,
   }));
 
   return paths;
