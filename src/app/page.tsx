@@ -1,8 +1,8 @@
 import styles from "./page.module.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import HomeCanvas from "./components/HomeCanvas";
 import { generateFragmentString, WORK_SHADERS, WorkShaderType } from "./utils";
+import GLSLCanvas from "./components/GLSLCanvas";
 
 export default async function Home() {
   // const [allFragmentString, setAllFragmentString] = useState<WorkShaderType[]>([]);
@@ -22,7 +22,13 @@ export default async function Home() {
       <Header />
       <main className={styles.main}>
         {/* <div className={styles.canvas} /> */}
-        <HomeCanvas fragmentString={fragmentString} />
+        <GLSLCanvas
+          fragmentString={fragmentString}
+          // textures=""
+          resolutionScale={0.5}
+          className={styles.canvas_container}
+        />
+        {/* <HomeCanvas fragmentString={fragmentString} /> */}
         {/* <HomeCanvas fragmentString={fragmentString} textures="MonaLisa.jpg,Taipei101_1.jpeg" /> */}
         {/* <HomeCanvas fragmentString={fragmentString} textures="moon.jpeg, Taipei101_1.jpeg" /> */}
         <div className={styles.container}>

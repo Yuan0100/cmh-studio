@@ -1,10 +1,10 @@
 @use './styles/breakpoints.scss';
 
-.canvas {
-  width: 100svw;
-  height: 70svh;
-  background-color: hsl(var(--color-neutral-800));
-}
+// .canvas {
+//   width: 100svw;
+//   height: 70svh;
+//   background-color: hsl(var(--color-neutral-800));
+// }
 
 .page {
   --gray-rgb: 0, 0, 0;
@@ -20,6 +20,17 @@
 
 .container {
   margin: var(--spacing-xl);
+}
+
+.canvas_container {
+  width: 100svw;
+  height: 70svh;
+  background-color: black;
+
+  @media (max-width: breakpoints.$md) {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

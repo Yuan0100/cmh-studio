@@ -5,10 +5,10 @@ import CustomMDX from "@/app/components/CustomMDX";
 import { mdxOptions } from "@/lib/mdx";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import CraftCanvas from "@/app/components/CraftCanvas";
 import styles from "./page.module.scss";
 import { generateFragmentString } from "./utils";
 import CodeBlock from "@/app/components/CodeBlock";
+import GLSLCanvas from "@/app/components/GLSLCanvas";
 
 type Props = {
   params: Promise<{
@@ -35,8 +35,13 @@ export default async function CraftPostPage({ params }: Props) {
   return (
     <div>
       <Header />
-      <div className={styles.canvas_container}>
-        <CraftCanvas fragmentString={fragmentString} textures={post.metadata.shader?.textures} />
+      <div className={styles.head_section}>
+        <GLSLCanvas
+          fragmentString={fragmentString}
+          textures={post.metadata.shader?.textures}
+          resolutionScale={0.5}
+          className={styles.canvas_container}
+        />
       </div>
       <div className={styles.container}>
         <main>

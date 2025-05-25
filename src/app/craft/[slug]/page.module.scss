@@ -7,7 +7,7 @@
   margin-top: var(--spacing-xl);
 }
 
-.canvas_container {
+.head_section {
   position: relative;
   width: 100svw;
   max-height: 70svh;
@@ -21,4 +21,13 @@
   @media (max-width: breakpoints.$md) {
     height: auto;
   }
+}
+
+.canvas_container {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
