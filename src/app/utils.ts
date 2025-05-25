@@ -44,6 +44,6 @@ export async function generateFragmentString(shaderSrc: string): Promise<string>
     basedir: "./src/shader",
   });
 
-  console.log('Log from utils.ts: ', content);
+  // console.log('Log from app/utils.ts: ', content);
   return content;
 }
