@@ -3,7 +3,7 @@
 #pragma glslify: setCamera = require('./common/setCamera.frag')
 #pragma glslify: trace = require('./common/trace.frag')
 #pragma glslify: gradient = require('./common/gradient.frag')
-#pragma glslify: getSkyALL = require('./common/getSkyALL.frag')
+#pragma glslify: getSkyALL = require('./common/getSkyAll.frag')
 
 vec3 hatching(vec3 p, vec3 n, float value){        
     vec3 col;

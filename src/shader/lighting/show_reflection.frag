@@ -2,7 +2,7 @@
 #pragma glslify: setCamera = require('./common/setCamera.frag')
 #pragma glslify: trace = require('./common/trace.frag')
 #pragma glslify: gradient = require('./common/gradient.frag')
-#pragma glslify: getSkyALL = require('./common/getSkyALL.frag')
+#pragma glslify: getSkyALL = require('./common/getSkyAll.frag')
 
 void main(){
     vec2 uv = gl_FragCoord.xy/u_resolution.xy;

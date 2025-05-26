@@ -3,7 +3,7 @@
 #pragma glslify: setCamera = require('./common/setCamera.frag')
 #pragma glslify: trace = require('./common/trace.frag')
 #pragma glslify: gradient = require('./common/gradient.frag')
-#pragma glslify: getSkyALL = require('./common/getSkyALL.frag')
+#pragma glslify: getSkyALL = require('./common/getSkyAll.frag')
 
 uniform sampler2D u_tex0;
 uniform sampler2D u_tex1;
