@@ -2,7 +2,7 @@
 #pragma glslify: setCamera = require('./common/setCamera.frag')
 #pragma glslify: phong = require('./common/phong.frag')
 #pragma glslify: triplanarMap = require('./common/triplanarMap.frag')
-#pragma glslify: getSkyALL = require('./common/getSkyALL.frag')
+#pragma glslify: getSkyALL = require('./common/getSkyAll.frag')
 #pragma glslify: trace = require('./common/trace.frag')
 #pragma glslify: gradient = require('./common/gradient.frag')
 
